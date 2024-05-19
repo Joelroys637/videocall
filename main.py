@@ -1,6 +1,6 @@
 import streamlit as st
 from streamlit_webrtc import webrtc_streamer, WebRtcMode, RTCConfiguration
-import av
+
 
 # Configuration for WebRTC
 RTC_CONFIGURATION = RTCConfiguration({
@@ -14,7 +14,7 @@ st.title("Video Conference Call")
 room_id = st.text_input("Enter Room ID:")
 
 # Join button
-if st.button("Join"):
+if st.checkbox("Join"):
     if room_id:
         st.write(f"Joining room: {room_id}")
 
