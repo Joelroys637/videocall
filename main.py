@@ -14,7 +14,7 @@ st.title("Video Conference Call")
 room_id = st.text_input("Enter Room ID:")
 
 # Join button
-if st.checkboc("Join"):
+if st.checkbox("Join"):
     if room_id:
         st.write(f"Joining room: {room_id}")
 
