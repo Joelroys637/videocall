@@ -14,7 +14,7 @@ def generate_unique_id():
 user_id = generate_unique_id()
 peer_id = st.text_input("Enter peer's unique ID:")
 
-if st.button("Start Video Call"):
+if st.radio("Start Video Call"):
     if user_id and peer_id:
         st.write(f"Connecting {user_id} to {peer_id}...")
 
