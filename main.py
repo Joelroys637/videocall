@@ -1,27 +1,36 @@
 import streamlit as st
 from streamlit_webrtc import webrtc_streamer, WebRtcMode, RTCConfiguration
+import av
 
-# RTC Configuration (use appropriate STUN/TURN servers)
-RTC_CONFIGURATION = RTCConfiguration({"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]})
+# Configuration for WebRTC
+RTC_CONFIGURATION = RTCConfiguration({
+    "iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]
+})
 
-st.title("Mini Video Call Feature")
+# Set up the Streamlit app
+st.title("Video Conference Call")
 
-# Function to generate unique IDs (example using user inputs for simplicity)
-def generate_unique_id():
-    return st.text_input("Enter your unique ID:")
+# Input for room ID
+room_id = st.text_input("Enter Room ID:")
 
-# Unique ID input for both users
-user_id = generate_unique_id()
-peer_id = st.text_input("Enter peer's unique ID:")
+# Join button
+if st.button("Join"):
+    if room_id:
+        st.write(f"Joining room: {room_id}")
 
-if st.checkbox("Start Video Call"):
-    if user_id and peer_id:
-        st.write(f"Connecting {user_id} to {peer_id}...")
+        class VideoProcessor:
+            def recv(self, frame):
+                return frame
 
         webrtc_streamer(
-            key="example",
+            key=f"room-{room_id}",
             mode=WebRtcMode.SENDRECV,
-            rtc_configuration=RTC_CONFIGURATION
+            rtc_configuration=RTC_CONFIGURATION,
+            media_stream_constraints={
+                "video": True,
+                "audio": True
+            },
+            video_processor_factory=VideoProcessor
         )
     else:
-        st.error("Please enter both your ID and your peer's ID.")
+        st.error("Please enter a Room ID.")
