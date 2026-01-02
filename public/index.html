@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StreamLine | WebRTC Video Chat</title>
+    <!-- Modern Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Landing / Join Room -->
+    <div id="landing">
+        <h1>StreamLine</h1>
+        <p style="text-align: center; color: #94a3b8; font-size: 0.9rem;">Real-time Secure Video Calling</p>
+
+        <div class="input-group">
+            <label for="roomIdInput">Room ID</label>
+            <input type="text" id="roomIdInput" placeholder="Enter Room ID to join...">
+        </div>
+
+        <div class="btn-container">
+            <button id="createBtn" class="btn-primary">
+                <i class="fa-solid fa-plus"></i> Create
+            </button>
+            <button id="joinBtn" class="btn-secondary">
+                <i class="fa-solid fa-right-to-bracket"></i> Join
+            </button>
+        </div>
+        <p id="statusMsg" style="text-align: center; color: #ef4444; font-size: 0.85rem; min-height: 1.25rem;"></p>
+    </div>
+
+    <!-- Video Call UI -->
+    <div id="call-screen">
+        <div id="room-info" title="Click to copy Room ID">
+            <i class="fa-solid fa-hashtag"></i>
+            <span id="currentRoomId">Connecting...</span>
+            <i class="fa-regular fa-copy" style="font-size: 0.8em; margin-left: 5px;"></i>
+        </div>
+
+        <div id="videos">
+            <video id="remoteVideo" autoplay playsinline></video>
+            <video id="localVideo" autoplay playsinline muted></video>
+        </div>
+
+        <div id="controls">
+            <button class="control-btn" id="micBtn" title="Toggle Microphone">
+                <i class="fa-solid fa-microphone"></i>
+            </button>
+            <button class="control-btn" id="cameraBtn" title="Toggle Camera">
+                <i class="fa-solid fa-video"></i>
+            </button>
+            <button class="control-btn" id="hangupBtn" title="Hangup">
+                <i class="fa-solid fa-phone-slash"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Firebase SDKs (using CDN for simplicity in this setup) -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+
+    <!-- App Logic -->
+    <script src="firebase-config.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
